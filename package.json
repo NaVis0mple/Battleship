@@ -1,0 +1,14 @@
+{
+  "name": "battleship",
+  "version": "1.0.0",
+  "description": "[top](https://www.theodinproject.com/lessons/node-path-javascript-battleship)",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.6.1"
+  }
+}
