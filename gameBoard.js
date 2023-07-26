@@ -1,15 +1,15 @@
 import { createShip } from './ship'
 export const gameBoard = () => {
-  const createGameBoard10X10 = () => {
-    let board = []
-    for (let i = 1; i < 11; i++) {
-      for (let j = 1; j < 11; j++) {
-        board.push([i, j])
-      }
-    }
-    return board
-  }
-  const gb = createGameBoard10X10()
+  // const createGameBoard10X10 = () => {
+  //   let board = []
+  //   for (let i = 1; i < 11; i++) {
+  //     for (let j = 1; j < 11; j++) {
+  //       board.push([i, j])
+  //     }
+  //   }
+  //   return board
+  // }
+  // const gb = createGameBoard10X10()
 
   // No.	Class of ship	Size
   // 1	Carrier	5
@@ -60,26 +60,37 @@ export const gameBoard = () => {
 
   let hitPos = []
   let missPos = []
-  const receiveAttack = pos => {
-    //check if receive same pos attack
+  const isValidAttack = pos => {
     const posx = pos[0]
     const posy = pos[1]
-    if (hitPos) {
-      for (const hit of hitPos) {
-        const [hitx, hity] = hit
-        if (hitx === posx && hity === posy) {
-          return 'same pos'
+    //in the borad
+    if (posx >= 1 && posx <= 10 && posy >= 1 && posy <= 10) {
+      //check if receive same pos attack
+      if (hitPos) {
+        for (const hit of hitPos) {
+          const [hitx, hity] = hit
+          if (hitx === posx && hity === posy) {
+            return 'same pos'
+          }
         }
       }
-    }
-    if (missPos) {
-      for (const miss of missPos) {
-        const [missx, missy] = miss
-        if (missx === posx && missy === posy) {
-          return 'same pos'
+      if (missPos) {
+        for (const miss of missPos) {
+          const [missx, missy] = miss
+          if (missx === posx && missy === posy) {
+            return 'same pos'
+          }
         }
       }
+      return true
+    } else {
+      return false
     }
+  }
+  const receiveAttack = pos => {
+    const posx = pos[0]
+    const posy = pos[1]
+
     const carrier = allShip.carrier
     const battleship = allShip.battleship
     const destroyer = allShip.battleship
@@ -103,5 +114,5 @@ export const gameBoard = () => {
     }
     missPos.push(pos)
   }
-  return { placeShip, allShip, receiveAttack, hitPos, missPos }
+  return { placeShip, allShip, isValidAttack, receiveAttack, hitPos, missPos }
 }

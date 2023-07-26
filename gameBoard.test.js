@@ -88,7 +88,8 @@ test('receiveAttack ,hit or miss', () => {
     [3, 3]
   ])
 })
-test('if receive same attack pos', () => {
+/////
+test('isValidAttack function', () => {
   const gb = gameBoard()
   gb.placeShip(
     [
@@ -100,9 +101,13 @@ test('if receive same attack pos', () => {
     ],
     'carrier'
   )
+  expect(gb.isValidAttack([20, 10])).toBe(false)
+  expect(gb.isValidAttack([3, 3])).toBe(true)
+
   gb.receiveAttack([3, 3])
   expect(gb.missPos).toEqual([[3, 3]])
-  const t = gb.receiveAttack([3, 3])
+
+  const t = gb.isValidAttack([3, 3])
   expect(t).toBe('same pos')
 })
 
