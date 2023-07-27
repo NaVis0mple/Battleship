@@ -18,7 +18,13 @@ export const gameBoard = () => {
   // 4	Submarine	3
   // 5	Patrol Boat	2
   let takenbyship = []
-  let allShip = {}
+  let allShip = {
+    carrier: null,
+    battleship: null,
+    destroyer: null,
+    submarine: null,
+    patrolBoat: null
+  }
   const placeShip = (array, name) => {
     //check taken or not
     for (const cell of array) {
@@ -43,10 +49,10 @@ export const gameBoard = () => {
       let battleship = createShip(4)
       battleship.pos = array
       allShip.battleship = battleship
-    } else if (name === 'destoroyer' && !allShip.destoroyer) {
-      let destoroyer = createShip(3)
-      destoroyer.pos = array
-      allShip.destoroyer = destoroyer
+    } else if (name === 'destroyer' && !allShip.destroyer) {
+      let destroyer = createShip(3)
+      destroyer.pos = array
+      allShip.destroyer = destroyer
     } else if (name === 'submarine' && !allShip.submarine) {
       let submarine = createShip(3)
       submarine.pos = array
@@ -56,6 +62,16 @@ export const gameBoard = () => {
       patrolBoat.pos = array
       allShip.patrolBoat = patrolBoat
     }
+  }
+
+  const isFiveShip = () => {
+    return (
+      allShip.carrier !== null &&
+      allShip.battleship !== null &&
+      allShip.destroyer !== null &&
+      allShip.submarine !== null &&
+      allShip.patrolBoat !== null
+    )
   }
 
   let hitPos = []
@@ -114,5 +130,13 @@ export const gameBoard = () => {
     }
     missPos.push(pos)
   }
-  return { placeShip, allShip, isValidAttack, receiveAttack, hitPos, missPos }
+  return {
+    placeShip,
+    allShip,
+    isFiveShip,
+    isValidAttack,
+    receiveAttack,
+    hitPos,
+    missPos
+  }
 }

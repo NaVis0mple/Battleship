@@ -45,6 +45,61 @@ test('if pos is taken by other ship', () => {
   )
   expect(battleship).toBe('duplicate place')
 })
+
+test('player have 5 ship ', () => {
+  const gb = gameBoard()
+  expect(gb.isFiveShip()).toBe(false)
+  gb.placeShip(
+    [
+      [1, 1],
+      [1, 2],
+      [1, 3],
+      [1, 4],
+      [1, 5]
+    ],
+    'carrier'
+  )
+  gb.placeShip(
+    [
+      [2, 1],
+      [2, 2],
+      [2, 3],
+      [2, 4]
+    ],
+    'battleship'
+  )
+  gb.placeShip(
+    [
+      [3, 1],
+      [3, 2],
+      [3, 3]
+    ],
+    'destroyer'
+  )
+  gb.placeShip(
+    [
+      [4, 1],
+      [4, 2],
+      [4, 3]
+    ],
+    'submarine'
+  )
+  gb.placeShip(
+    [
+      [5, 1],
+      [5, 2],
+      [5, 3]
+    ],
+    'patrolBoat'
+  )
+  expect(gb.isFiveShip()).toBe(true)
+  //   1	Carrier	5
+  //   2	Battleship	4
+  //   3	Destroyer	3
+  //   4	Submarine	3
+  //   5	Patrol Boat	2
+})
+
 test('receiveAttack function', () => {
   const gb = gameBoard()
   gb.placeShip(
