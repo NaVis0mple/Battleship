@@ -1,6 +1,8 @@
-import { gameBoard } from './gameBoard'
-import { playerturn } from './player'
-import { computerturn } from './player'
+import { gameBoard } from './src/gameBoard'
+import { game } from './src/gameFlow'
+import { playerturn } from './src/player'
+import { computerturn } from './src/player'
+import { createComputerBoat } from './src/player'
 test('player turn ', () => {
   const computer = gameBoard()
   computer.placeShip(
@@ -27,4 +29,10 @@ test('computerturn', () => {
   computerturn(player)
   expect(spy).toHaveBeenCalled()
   expect(spy2).toHaveBeenCalled()
+})
+
+test('computer create 5 boat function ', () => {
+  const computerboard = gameBoard()
+  createComputerBoat(computerboard)
+  expect(computerboard.isFiveShip()).toBe(true)
 })

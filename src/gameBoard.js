@@ -1,16 +1,5 @@
 import { createShip } from './ship'
 export const gameBoard = () => {
-  // const createGameBoard10X10 = () => {
-  //   let board = []
-  //   for (let i = 1; i < 11; i++) {
-  //     for (let j = 1; j < 11; j++) {
-  //       board.push([i, j])
-  //     }
-  //   }
-  //   return board
-  // }
-  // const gb = createGameBoard10X10()
-
   // No.	Class of ship	Size
   // 1	Carrier	5
   // 2	Battleship	4
@@ -40,24 +29,40 @@ export const gameBoard = () => {
     }
     takenbyship.push(...array)
 
-    if (name === 'carrier' && !allShip.carrier) {
+    if (name === 'carrier' && !allShip.carrier && array.length === 5) {
       let carrier = createShip(5)
       carrier.pos = array
       allShip.carrier = carrier
       return
-    } else if (name === 'battleship' && !allShip.battleship) {
+    } else if (
+      name === 'battleship' &&
+      !allShip.battleship &&
+      array.length === 4
+    ) {
       let battleship = createShip(4)
       battleship.pos = array
       allShip.battleship = battleship
-    } else if (name === 'destroyer' && !allShip.destroyer) {
+    } else if (
+      name === 'destroyer' &&
+      !allShip.destroyer &&
+      array.length === 3
+    ) {
       let destroyer = createShip(3)
       destroyer.pos = array
       allShip.destroyer = destroyer
-    } else if (name === 'submarine' && !allShip.submarine) {
+    } else if (
+      name === 'submarine' &&
+      !allShip.submarine &&
+      array.length === 3
+    ) {
       let submarine = createShip(3)
       submarine.pos = array
       allShip.submarine = submarine
-    } else if (name === 'patrolBoat' && !allShip.patrolBoat) {
+    } else if (
+      name === 'patrolBoat' &&
+      !allShip.patrolBoat &&
+      array.length === 2
+    ) {
       let patrolBoat = createShip(2)
       patrolBoat.pos = array
       allShip.patrolBoat = patrolBoat
@@ -109,7 +114,7 @@ export const gameBoard = () => {
 
     const carrier = allShip.carrier
     const battleship = allShip.battleship
-    const destroyer = allShip.battleship
+    const destroyer = allShip.destroyer
     const submarine = allShip.submarine
     const patrolBoat = allShip.patrolBoat
     const boatarray = [carrier, battleship, destroyer, submarine, patrolBoat]

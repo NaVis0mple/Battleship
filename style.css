@@ -1,0 +1,12 @@
+#playerBoard {
+    display: grid;
+    grid-template-columns: repeat(10,1fr);
+}
+
+.hit {
+    background-color: red;
+}
+
+.miss {
+    background-color: gray;
+}

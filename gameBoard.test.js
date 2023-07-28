@@ -1,5 +1,5 @@
-import { gameBoard } from './gameBoard'
-import { createShip } from './ship'
+import { gameBoard } from './src/gameBoard'
+import { createShip } from './src/ship'
 test.todo('10*10grid')
 
 test('placeship function', () => {
@@ -87,8 +87,7 @@ test('player have 5 ship ', () => {
   gb.placeShip(
     [
       [5, 1],
-      [5, 2],
-      [5, 3]
+      [5, 2]
     ],
     'patrolBoat'
   )

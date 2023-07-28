@@ -1,4 +1,4 @@
-import { createShip } from './ship'
+import { createShip } from './src/ship'
 //  if not hide , need test all
 // test('first create ship', () => {
 //   const firstShip = createShip(5)
