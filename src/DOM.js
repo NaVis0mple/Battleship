@@ -1,15 +1,15 @@
-export const domMOdule = () => {
-  function createGameBoardUI () {
+export const domModule = () => {
+  function createGameBoardUI (who) {
     //10*10
-    const playerBoard = document.getElementById('playerBoard')
+    const Board = document.getElementById(who + 'Board')
     const tenbyten = (() => {
       for (let i = 1; i < 11; i++) {
         for (let j = 1; j < 11; j++) {
           const div = document.createElement('div')
           div.textContent = 'O'
-          div.id = `${i},${j}`
-          div.classList.add('cell')
-          playerBoard.appendChild(div)
+          div.id = `${who}${i},${j}`
+          div.classList.add(who + 'cell')
+          Board.appendChild(div)
         }
       }
     })()
@@ -31,19 +31,29 @@ export const domMOdule = () => {
   }
 
   function inputAttackPos () {}
-  function eventListenOfCell () {
-    const cells = document.querySelectorAll('.cell')
-    cells.forEach(cell =>
-      cell.addEventListener('click', e => {
-        return [e.target.id]
-      })
-    )
+  function addEventListenOfCell (who) {
+    return new Promise(resolve => {
+      const cells = document.querySelectorAll(`.${who}cell`)
+      cells.forEach(cell =>
+        cell.addEventListener(
+          'click',
+          e => {
+            const rowPos = e.target.id
+            const pos = rowPos.replace(/[a-zA-Z]+/g, '')
+            const split = pos.split(',')
+            const target = [+split[0], +split[1]]
+            resolve(target)
+          },
+          { once: true }
+        )
+      )
+    })
   }
   return {
     createGameBoardUI,
     changeBoard_Hit,
     changeBoard_Miss,
     inputAttackPos,
-    eventListenOfCell
+    addEventListenOfCell
   }
 }

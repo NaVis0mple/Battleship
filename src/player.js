@@ -1,11 +1,16 @@
 import { gameBoard } from './gameBoard'
-import { domMOdule } from './DOM'
-export const playerturn = (pos, computerboard) => {
-  //attack pos
-  if (computerboard.isValidAttack(pos)) {
-    computerboard.receiveAttack(pos)
-  } else {
-    return 'novalid'
+import { domModule } from './DOM'
+export async function playerturn (computerboard) {
+  //click playerboard and attack it but is computerboard receiveattack
+  while (true) {
+    const n = await domModule().addEventListenOfCell('player')
+    if (computerboard.isValidAttack(n)) {
+      computerboard.receiveAttack(n)
+      console.log(computerboard.hitPos)
+      break
+    } else {
+      console.log('Invalid,try again')
+    }
   }
 }
 

@@ -1,6 +1,11 @@
-#playerBoard {
+#playerBoard,#computerBoard {
     display: grid;
     grid-template-columns: repeat(10,1fr);
+}
+
+
+#computerBoard {
+    margin-top: 50px;
 }
 
 .hit {

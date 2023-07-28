@@ -2,7 +2,7 @@ import { playerturn } from './player'
 import { computerturn } from './player'
 import { gameBoard } from './gameBoard'
 import { createComputerBoat } from './player'
-import { domMOdule } from './DOM'
+import { domModule } from './DOM'
 const presetship = board => {
   board.placeShip(
     [
@@ -47,10 +47,12 @@ const presetship = board => {
     'patrolBoat'
   )
 }
-const game = () => {
+async function game () {
   //create board
   const playerboard = gameBoard()
   const computerboard = gameBoard()
+  domModule().createGameBoardUI('player')
+  domModule().createGameBoardUI('computer')
   // check each player have five board
   //for now just preset the ship
   presetship(playerboard)
@@ -60,7 +62,7 @@ const game = () => {
     return 'need 5 board'
   }
   //start
-
-  playerturn()
+  await playerturn(computerboard)
+  await playerturn(computerboard)
 }
-console.log('jo')
+game()
