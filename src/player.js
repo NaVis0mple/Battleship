@@ -1,12 +1,12 @@
 import { gameBoard } from './gameBoard'
 import { domModule } from './DOM'
 export async function playerturn (computerboard) {
-  //click playerboard and attack it but is computerboard receiveattack
+  //click playerboard and attack it but is computerboard receive attack
   while (true) {
-    const n = await domModule().addEventListenOfCell('player')
+    let n = await domModule().addEventListenOfCell('computer')
     if (computerboard.isValidAttack(n)) {
-      computerboard.receiveAttack(n)
-      console.log(computerboard.hitPos)
+      computerboard.receiveAttack(n, 'computer')
+
       break
     } else {
       console.log('Invalid,try again')
@@ -18,10 +18,14 @@ export const computerturn = playerboard => {
   function getRandom () {
     return Math.floor(Math.random() * 10) + 1
   }
+  let pos = [getRandom(), getRandom()]
 
-  const pos = [getRandom(), getRandom()]
-  if (playerboard.isValidAttack(pos)) {
-    playerboard.receiveAttack(pos)
+  while (true) {
+    if (playerboard.isValidAttack(pos)) {
+      playerboard.receiveAttack(pos, 'player')
+      break
+    }
+    pos = [getRandom(), getRandom()]
   }
 }
 
