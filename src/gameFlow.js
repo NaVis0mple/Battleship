@@ -53,16 +53,21 @@ async function game () {
   const computerboard = gameBoard()
   domModule().createGameBoardUI('player')
   domModule().createGameBoardUI('computer')
+
   // check each player have five board
   //for now just preset the ship
   presetship(playerboard)
+  domModule().showPlayerBoardBoatGreen(playerboard)
   createComputerBoat(computerboard)
 
   if (!playerboard.isFiveShip()) {
     return 'need 5 board'
   }
   //start
-  await playerturn(computerboard)
-  await playerturn(computerboard)
+  while (!playerboard.isAllShipSunk() && !computerboard.isAllShipSunk()) {
+    await playerturn(computerboard)
+    computerturn(playerboard)
+  }
+  //print who win
 }
 game()
