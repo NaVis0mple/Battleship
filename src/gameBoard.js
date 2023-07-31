@@ -1,4 +1,5 @@
 import { createShip } from './ship'
+import { domModule } from './DOM'
 export const gameBoard = () => {
   // No.	Class of ship	Size
   // 1	Carrier	5
@@ -87,28 +88,27 @@ export const gameBoard = () => {
     //in the borad
     if (posx >= 1 && posx <= 10 && posy >= 1 && posy <= 10) {
       //check if receive same pos attack
-      if (hitPos) {
+      if (hitPos && hitPos.length) {
         for (const hit of hitPos) {
           const [hitx, hity] = hit
           if (hitx === posx && hity === posy) {
-            return 'same pos'
+            return false
           }
         }
       }
-      if (missPos) {
+      if (missPos && hitPos.length) {
         for (const miss of missPos) {
           const [missx, missy] = miss
           if (missx === posx && missy === posy) {
-            return 'same pos'
+            return false
           }
         }
       }
       return true
-    } else {
-      return false
     }
+    return false
   }
-  const receiveAttack = pos => {
+  const receiveAttack = (pos, who) => {
     const posx = pos[0]
     const posy = pos[1]
 
@@ -124,16 +124,27 @@ export const gameBoard = () => {
           const arrx = cell[0]
           const arry = cell[1]
           if (arrx === posx && arry === posy) {
-            const index = boat.pos.indexOf(cell)
-            boat.pos.splice(index, 1)
+            // const inde x = boat.pos.indexOf(cell)
+            // boat.pos.splice(index, 1)
             boat.hit()
             hitPos.push(pos)
+            domModule().changeBoard_Hit(who, pos)
             return
           }
         }
       }
     }
     missPos.push(pos)
+    domModule().changeBoard_Miss(who, pos)
+  }
+  const isAllShipSunk = () => {
+    return (
+      allShip.carrier.isSunk() &&
+      allShip.battleship.isSunk() &&
+      allShip.destroyer.isSunk() &&
+      allShip.patrolBoat.isSunk() &&
+      allShip.submarine.isSunk()
+    )
   }
   return {
     placeShip,
@@ -142,6 +153,8 @@ export const gameBoard = () => {
     isValidAttack,
     receiveAttack,
     hitPos,
-    missPos
+    missPos,
+    isAllShipSunk,
+    takenbyship
   }
 }
