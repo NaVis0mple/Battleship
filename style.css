@@ -8,6 +8,10 @@
     margin-top: 50px;
 }
 
+.green {
+    background-color: green;
+}
+
 .hit {
     background-color: red;
 }
