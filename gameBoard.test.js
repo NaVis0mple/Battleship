@@ -162,7 +162,7 @@ test('isValidAttack function', () => {
   expect(gb.missPos).toEqual([[3, 3]])
 
   const t = gb.isValidAttack([3, 3])
-  expect(t).toBe('same pos')
+  expect(t).toBe(false)
 })
 
 test('hit and issunk function in ship.js', () => {
@@ -178,3 +178,5 @@ test('hit and issunk function in ship.js', () => {
   gb.receiveAttack([2, 1])
   expect(gb.allShip.patrolBoat.isSunk()).toBe(true)
 })
+
+test.todo('is all ship sunk')

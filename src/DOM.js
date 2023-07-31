@@ -14,19 +14,26 @@ export const domModule = () => {
       }
     })()
   }
-  function changeBoard_Hit (pos) {
+  function showPlayerBoardBoatGreen (playerboard) {
+    const rowArray = playerboard.takenbyship
+    for (const pos of rowArray) {
+      const div = document.getElementById(`player${pos[0]},${pos[1]}`)
+      div.classList.add('green')
+    }
+  }
+  function changeBoard_Hit (who, pos) {
     //turn the cell background red
     const posx = pos[0]
     const posy = pos[1]
-    const target = document.getElementById(`${posx},${posy}`)
+    const target = document.getElementById(`${who}${posx},${posy}`)
     target.classList.add('hit')
   }
 
-  function changeBoard_Miss (pos) {
+  function changeBoard_Miss (who, pos) {
     //turn cell gray
     const posx = pos[0]
     const posy = pos[1]
-    const target = document.getElementById(`${posx},${posy}`)
+    const target = document.getElementById(`${who}${posx},${posy}`)
     target.classList.add('miss')
   }
 
@@ -54,6 +61,7 @@ export const domModule = () => {
     changeBoard_Hit,
     changeBoard_Miss,
     inputAttackPos,
-    addEventListenOfCell
+    addEventListenOfCell,
+    showPlayerBoardBoatGreen
   }
 }
