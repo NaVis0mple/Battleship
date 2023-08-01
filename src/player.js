@@ -30,58 +30,36 @@ export const computerturn = playerboard => {
 }
 
 //computer need five random board
-export const createComputerBoat = board => {
-  //attempt to create random boat
-  //   function getRandom () {
-  //     return Math.floor(Math.random() * 10) + 1
-  //   }
-  //   function createArray (arrayLength) {
-  //     const direction = Math.random() < 0.5
-  //     if(direction){
+export const createComputerBoat = (board, shipLength, name) => {
+  function getRandom () {
+    return Math.floor(Math.random() * 10) + 1
+  }
+  function createArray (shipLength) {
+    const isHorizon = Math.random() < 0.5
+    const pos = []
+    const startX = getRandom()
+    const startY = getRandom()
+    for (let i = 0; i < shipLength; i++) {
+      const x = isHorizon ? startX + i : startX
+      const y = isHorizon ? startY : startY + i
+      pos.push([x, y])
+    }
+    return pos
+  }
+  let array = createArray(shipLength)
+  while (true) {
+    array = createArray(shipLength)
+    if (board.checkValidPlace(array)) {
+      break
+    }
+  }
+  board.placeShip(array, name)
+}
 
-  //     }
-  //   }
-
-  board.placeShip(
-    [
-      [1, 1],
-      [1, 2],
-      [1, 3],
-      [1, 4],
-      [1, 5]
-    ],
-    'carrier'
-  )
-  board.placeShip(
-    [
-      [4, 1],
-      [4, 2],
-      [4, 3],
-      [4, 4]
-    ],
-    'battleship'
-  )
-  board.placeShip(
-    [
-      [3, 8],
-      [3, 7],
-      [3, 6]
-    ],
-    'destroyer'
-  )
-  board.placeShip(
-    [
-      [7, 5],
-      [7, 6],
-      [7, 7]
-    ],
-    'submarine'
-  )
-  board.placeShip(
-    [
-      [9, 8],
-      [9, 7]
-    ],
-    'patrolBoat'
-  )
+export const createComputerFiveShip = board => {
+  createComputerBoat(board, 5, 'carrier')
+  createComputerBoat(board, 4, 'battleship')
+  createComputerBoat(board, 3, 'destroyer')
+  createComputerBoat(board, 3, 'submarine')
+  createComputerBoat(board, 2, 'patrolBoat')
 }

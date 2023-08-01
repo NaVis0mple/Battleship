@@ -15,18 +15,28 @@ export const gameBoard = () => {
     submarine: null,
     patrolBoat: null
   }
-  const placeShip = (array, name) => {
-    //check taken or not
+  const checkValidPlace = array => {
     for (const cell of array) {
       const arrx = cell[0]
       const arry = cell[1]
+      if (arrx < 1 || arrx > 10 || arry < 1 || arry > 10) {
+        return false
+      }
       for (const cellt of takenbyship) {
         const tx = cellt[0]
         const ty = cellt[1]
         if (arrx === tx && arry === ty) {
-          return 'duplicate place'
+          return false
         }
       }
+    }
+    return true
+  }
+
+  const placeShip = (array, name) => {
+    //check taken or not
+    if (!checkValidPlace(array)) {
+      return
     }
     takenbyship.push(...array)
 
@@ -155,6 +165,7 @@ export const gameBoard = () => {
     hitPos,
     missPos,
     isAllShipSunk,
-    takenbyship
+    takenbyship,
+    checkValidPlace
   }
 }

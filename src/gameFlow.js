@@ -1,4 +1,4 @@
-import { playerturn } from './player'
+import { createComputerFiveShip, playerturn } from './player'
 import { computerturn } from './player'
 import { gameBoard } from './gameBoard'
 import { createComputerBoat } from './player'
@@ -58,7 +58,7 @@ async function game () {
   //for now just preset the ship
   presetship(playerboard)
   domModule().showPlayerBoardBoatGreen(playerboard)
-  createComputerBoat(computerboard)
+  createComputerFiveShip(computerboard)
 
   if (!playerboard.isFiveShip()) {
     return 'need 5 board'
