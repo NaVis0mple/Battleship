@@ -36,7 +36,7 @@ export const gameBoard = () => {
   const placeShip = (array, name) => {
     //check taken or not
     if (!checkValidPlace(array)) {
-      return
+      return false
     }
     takenbyship.push(...array)
 
@@ -106,7 +106,7 @@ export const gameBoard = () => {
           }
         }
       }
-      if (missPos && hitPos.length) {
+      if (missPos && missPos.length) {
         for (const miss of missPos) {
           const [missx, missy] = miss
           if (missx === posx && missy === posy) {
