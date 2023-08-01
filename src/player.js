@@ -6,7 +6,6 @@ export async function playerturn (computerboard) {
     let n = await domModule().addEventListenOfCell('computer')
     if (computerboard.isValidAttack(n)) {
       computerboard.receiveAttack(n, 'computer')
-
       break
     } else {
       console.log('Invalid,try again')

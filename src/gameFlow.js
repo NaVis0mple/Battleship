@@ -70,4 +70,5 @@ async function game () {
   }
   //print who win
 }
-game()
+//when test cant run game()
+// game()
