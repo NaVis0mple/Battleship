@@ -69,6 +69,11 @@ async function game () {
     computerturn(playerboard)
   }
   //print who win
+  if (playerboard.isAllShipSunk()) {
+    domModule().printResult('you lose')
+  } else {
+    domModule().printResult('you win')
+  }
 }
-//when test cant run game()
-// game()
+//when use test cant run game() at same time
+domModule().newGameButtonListener(game)
