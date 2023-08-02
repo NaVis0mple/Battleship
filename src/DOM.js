@@ -37,7 +37,20 @@ export const domModule = () => {
     target.classList.add('miss')
   }
 
-  function inputAttackPos () {}
+  function newGameButtonListener (game) {
+    const button = document.getElementById('newGame')
+    const playerboard = document.getElementById('playerBoard')
+    const computerboard = document.getElementById('computerBoard')
+
+    button.addEventListener('click', () => {
+      playerboard.textContent = ''
+      computerboard.textContent = ''
+      game()
+    })
+  }
+  function printResult (result) {
+    alert(result)
+  }
   function addEventListenOfCell (who) {
     return new Promise(resolve => {
       const cells = document.querySelectorAll(`.${who}cell`)
@@ -60,8 +73,9 @@ export const domModule = () => {
     createGameBoardUI,
     changeBoard_Hit,
     changeBoard_Miss,
-    inputAttackPos,
+    newGameButtonListener,
     addEventListenOfCell,
-    showPlayerBoardBoatGreen
+    showPlayerBoardBoatGreen,
+    printResult
   }
 }
