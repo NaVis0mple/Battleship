@@ -1,8 +1,20 @@
+
 #playerBoard,#computerBoard {
     display: grid;
-    grid-template-columns: repeat(10,1fr);
+    grid-template-columns: repeat(10,30px);
+    grid-template-rows: repeat(10,30px);
+    justify-content: center;
 }
 
+#playerBoard::before {
+    position: absolute;
+    content: 'your board';
+}
+
+#computerBoard::before {
+    position: absolute;
+    content: 'computer board';
+}
 
 #computerBoard {
     margin-top: 50px;
